@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/pred-data', methods = ['POST'])
 
 def pred_data():
-    image = request.files.get('digit')
+    image = request.files.get('alphabet')
     prediction = getPred(image)
     return jsonify({
         'prediction':prediction

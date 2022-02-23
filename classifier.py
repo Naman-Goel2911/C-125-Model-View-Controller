@@ -5,11 +5,16 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.datasets import fetch_openml
 from PIL import Image
 import PIL.ImageOps
+import os, ssl, time
 
-x = np.load('image.npz')
-y = pd.read_csv('labels.csv')
+x = np.load('image.npz')['arr_0']
+y = pd.read_csv('labels.csv')['labels']
 
-xTrain, xTest, yTrain, yTest = train_test_split(x, y, test_size = 2500, train_size= 7500, random_state = 9)
+print(pd.Series(y).value_counts())
+classes = ['A', 'B','C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+nclasses  = len(classes)
+
+xTrain, xTest, yTrain, yTest = train_test_split(x, y, test_size = 500, train_size= 3500, random_state = 9)
 xTrainScaled = xTrain/255
 xTestScaled = xTest/255
 
